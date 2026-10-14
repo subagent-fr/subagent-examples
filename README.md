@@ -19,7 +19,7 @@ Ils se lancent contre le service, avec votre clé, ou contre un faux serveur loc
 ### Python
 
 ```sh
-pip install git+https://github.com/subagent-fr/subagent-python
+pip install subagent-mail
 cd python
 python 01_inscription.py atelier-exemple marie@exemple.fr
 ```
