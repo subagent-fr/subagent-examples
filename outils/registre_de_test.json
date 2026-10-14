@@ -1,0 +1,3501 @@
+{
+  "source": "registre d'opérations du serveur Subagent (API 0.10.6)",
+  "operations": {
+    "sign_up": {
+      "sans_cle": true,
+      "permissions": [],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "agent_name": {
+            "description": "Votre nom d’agent, tel qu’il s’affichera dans « De : » et dans l’e-mail envoyé à votre humain : lettres, chiffres, espaces, tirets et apostrophes. Facultatif.",
+            "maxLength": 60,
+            "type": "string"
+          },
+          "human_email": {
+            "description": "E-mail de la personne pour qui vous travaillez : elle reçoit le code de vérification. Facultatif : sans lui, la boîte reçoit mais n’envoie pas.",
+            "type": "string"
+          },
+          "username": {
+            "description": "Nom de votre boîte, avant @ : 3 à 32 caractères, minuscules, chiffres, . _ - (par exemple « atelier-durand »). Les noms de service (support, admin, postmaster…) sont réservés, et un nom déjà attribué ne se réattribue pas.",
+            "pattern": "^[a-z0-9][a-z0-9._-]{2,31}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "username"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "username": "atelier-exemple",
+        "human_email": "marie@exemple.fr",
+        "agent_name": "Atelier Exemple"
+      },
+      "obligatoires": {
+        "username": "atelier-exemple"
+      },
+      "exemple": {
+        "api_key": "sak_exemple_agent",
+        "code_expires_at": "2026-10-14T09:00:00+02:00",
+        "code_sent": true,
+        "human_email": "m•••@exemple.fr",
+        "inbox": {
+          "address": "atelier-exemple@subagentmail.fr",
+          "aliases": [],
+          "display_name": "Atelier Exemple",
+          "drafts": 0,
+          "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "next_send_at": null,
+          "queued": 1,
+          "quota": {
+            "daily_quota": 5,
+            "daily_max": 20,
+            "sent_today": 0,
+            "remaining_today": 5
+          },
+          "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+          "shared": false,
+          "status": "active",
+          "status_changed_at": null,
+          "status_reason": null,
+          "suspension": null,
+          "warmup": {}
+        },
+        "mcp_url": "https://api.subagent.fr/mcp",
+        "space_id": "ten_5b8e1f3a7c2d4e9f8a6b0c1d2e3f4a5b",
+        "status": "unverified",
+        "trial_limits": {}
+      }
+    },
+    "verify": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "send",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "non vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "otp_code": {
+            "description": "Le code à 6 chiffres reçu par votre humain.",
+            "pattern": "^[0-9]{6}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "otp_code"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "otp_code": "482913"
+      },
+      "obligatoires": {
+        "otp_code": "482913"
+      },
+      "exemple": {
+        "space_id": "ten_5b8e1f3a7c2d4e9f8a6b0c1d2e3f4a5b",
+        "trial_limits": {},
+        "verified": true,
+        "verified_at": "2026-10-13T09:00:00+02:00"
+      }
+    },
+    "attach_human": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "send",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "non vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "human_email": {
+            "description": "E-mail de la personne pour qui vous travaillez : elle reçoit le code.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "human_email"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "human_email": "marie@exemple.fr"
+      },
+      "obligatoires": {
+        "human_email": "marie@exemple.fr"
+      },
+      "exemple": {
+        "code_expires_at": "2026-10-14T09:00:00+02:00",
+        "code_sent": true,
+        "human_email": "m•••@exemple.fr",
+        "replaced": false
+      }
+    },
+    "inbox_status": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "send",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "inbox_id": {
+            "description": "Une boîte précise (inb_…). Absent : toutes les boîtes de la clé.",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95"
+      },
+      "obligatoires": {},
+      "exemple": {
+        "billing": null,
+        "human_email": "m•••@exemple.fr",
+        "inboxes": [
+          {
+            "address": "atelier-exemple@subagentmail.fr",
+            "aliases": [],
+            "display_name": "Atelier Exemple",
+            "drafts": 0,
+            "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+            "next_send_at": null,
+            "queued": 1,
+            "quota": {
+              "daily_quota": 5,
+              "daily_max": 20,
+              "sent_today": 0,
+              "remaining_today": 5
+            },
+            "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+            "shared": false,
+            "status": "active",
+            "status_changed_at": null,
+            "status_reason": null,
+            "suspension": null,
+            "warmup": {}
+          }
+        ],
+        "key": {},
+        "now": "2026-10-13T09:00:00+02:00",
+        "require_approval": false,
+        "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+        "tenant": {},
+        "trial": null,
+        "verified": true
+      }
+    },
+    "workspace_snapshot": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "read",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "known_revision": {
+            "description": "Révision opaque précédemment reçue, facultative.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "known_revision": "r-2026-10-14-1"
+      },
+      "obligatoires": {},
+      "exemple": {
+        "access_key": "4ae8c0f0c211205c7dd577758acd2552",
+        "refreshed_at": "2026-10-13T09:00:00+02:00",
+        "revision": "5d41402abc4b2a76",
+        "unavailable": {},
+        "unchanged": false,
+        "views": {}
+      }
+    },
+    "activity_report": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "inbox_id": {
+            "description": "Une seule boîte (inb_…). Absent : toutes les boîtes de la clé.",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "period": {
+            "default": "today",
+            "description": "today : le jour en cours (heure de Paris). week : les sept derniers jours, aujourd’hui compris.",
+            "enum": [
+              "today",
+              "week"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "period": "week",
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95"
+      },
+      "obligatoires": {},
+      "exemple": {
+        "billing": null,
+        "by_day": [],
+        "inboxes": [
+          {
+            "address": "atelier-exemple@subagentmail.fr",
+            "aliases": [],
+            "display_name": "Atelier Exemple",
+            "drafts": 0,
+            "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+            "next_send_at": null,
+            "queued": 1,
+            "quota": {
+              "daily_quota": 5,
+              "daily_max": 20,
+              "sent_today": 0,
+              "remaining_today": 5
+            },
+            "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+            "shared": false,
+            "status": "active",
+            "status_changed_at": null,
+            "status_reason": null,
+            "suspension": null,
+            "warmup": {}
+          }
+        ],
+        "key": {},
+        "now": "2026-10-13T09:00:00+02:00",
+        "pending": {},
+        "period": {},
+        "require_approval": false,
+        "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+        "tenant": {},
+        "totals": {},
+        "verified": true
+      }
+    },
+    "list_events": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_id": {
+            "description": "Une audience (aud_…).",
+            "pattern": "^aud_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "campaign_id": {
+            "description": "Une campagne (cmp_…).",
+            "pattern": "^cmp_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "contact": {
+            "description": "Une adresse : ses fils, sa fiche, ses blocages.",
+            "maxLength": 254,
+            "type": "string"
+          },
+          "cursor": {
+            "description": "Curseur de la page suivante : la valeur next_cursor de l’appel précédent.",
+            "type": "string"
+          },
+          "day": {
+            "description": "Un jour de Paris, AAAA-MM-JJ. Absent : aujourd’hui, sauf si un objet est donné (alors tout son historique).",
+            "examples": [
+              "2026-10-14"
+            ],
+            "type": "string"
+          },
+          "domain": {
+            "description": "Un domaine : ses vérifications et ses boîtes.",
+            "maxLength": 253,
+            "type": "string"
+          },
+          "inbox_id": {
+            "description": "Une boîte (inb_…).",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "limit": {
+            "default": 50,
+            "maximum": 200,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "message_id": {
+            "description": "Un message (msg_…).",
+            "pattern": "^msg_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "thread_id": {
+            "description": "Un fil (thr_…).",
+            "pattern": "^thr_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "day": "2026-10-14",
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "contact": "nadia.morel@exemple.com",
+        "domain": "agents.exemple.fr",
+        "cursor": "eyJhIjoiMjAyNi0xMC0xMyJ9",
+        "limit": 20
+      },
+      "obligatoires": {},
+      "exemple": {
+        "day": null,
+        "events": [],
+        "next_cursor": null
+      }
+    },
+    "billing_status": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "send",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "invoices": [],
+        "last_payment": "none",
+        "period": null,
+        "plan": null,
+        "plans": [],
+        "standing": "exempt",
+        "subscription": {},
+        "usage": {}
+      }
+    },
+    "subscribe": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "send",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "plan": {
+            "description": "Le forfait à proposer (mail-9 par défaut). Votre humain peut en choisir un autre sur la page.",
+            "enum": [
+              "mail-9",
+              "mail-19",
+              "mail-49"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "plan": "mail-19"
+      },
+      "obligatoires": {},
+      "exemple": {
+        "expires_at": null,
+        "human": null,
+        "payment_url": null,
+        "plan": null,
+        "plans": [],
+        "status": "link_ready"
+      }
+    },
+    "cancel_subscription": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "paid_until": null,
+        "plan": null,
+        "status": "canceled"
+      }
+    },
+    "list_inboxes": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "send",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "cursor": {
+            "description": "Curseur de la page suivante : la valeur next_cursor de l’appel précédent.",
+            "type": "string"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Nombre d’éléments rendus (20 par défaut).",
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "cursor": "eyJhIjoiMjAyNi0xMC0xMyJ9",
+        "limit": 20
+      },
+      "obligatoires": {},
+      "exemple": {
+        "items": [
+          {
+            "address": "atelier-exemple@subagentmail.fr",
+            "aliases": [],
+            "display_name": "Atelier Exemple",
+            "drafts": 0,
+            "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+            "next_send_at": null,
+            "queued": 1,
+            "quota": {
+              "daily_quota": 5,
+              "daily_max": 20,
+              "sent_today": 0,
+              "remaining_today": 5
+            },
+            "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+            "shared": false,
+            "status": "active",
+            "status_changed_at": null,
+            "status_reason": null,
+            "suspension": null,
+            "warmup": {}
+          }
+        ],
+        "next_cursor": null
+      }
+    },
+    "create_inbox": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {
+            "description": "Nom affiché dans « De : », par exemple « Marie de Prescriptio ».",
+            "maxLength": 100,
+            "type": "string"
+          },
+          "domain": {
+            "description": "Domaine d’envoi de l’espace. Absent : son premier domaine, le sien d’abord s’il en a un de vérifié (voir inbox_status, tenant.domains).",
+            "type": "string"
+          },
+          "username": {
+            "description": "Partie avant @ (minuscules, chiffres, . _ -), par exemple « prospection » ou « marie.durand ». Sur le domaine commun : 3 à 32 caractères, et une adresse déjà attribuée ne se réattribue pas.",
+            "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "username",
+          "display_name"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "username": "atelier-exemple",
+        "display_name": "Marie d’Atelier Exemple",
+        "domain": "agents.exemple.fr"
+      },
+      "obligatoires": {
+        "username": "atelier-exemple",
+        "display_name": "Marie d’Atelier Exemple"
+      },
+      "exemple": {
+        "address": "atelier-exemple@subagentmail.fr",
+        "aliases": [],
+        "display_name": "Atelier Exemple",
+        "drafts": 0,
+        "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "next_send_at": null,
+        "queued": 1,
+        "quota": {
+          "daily_quota": 5,
+          "daily_max": 20,
+          "sent_today": 0,
+          "remaining_today": 5
+        },
+        "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+        "shared": false,
+        "status": "active",
+        "status_changed_at": null,
+        "status_reason": null,
+        "suspension": null,
+        "warmup": {}
+      }
+    },
+    "update_inbox": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "display_name": {
+            "description": "Le nouveau nom affiché dans « De : ».",
+            "maxLength": 100,
+            "type": "string"
+          },
+          "inbox_id": {
+            "description": "La boîte à renommer (inb_…).",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "inbox_id",
+          "display_name"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "display_name": "Marie d’Atelier Exemple"
+      },
+      "obligatoires": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "display_name": "Marie d’Atelier Exemple"
+      },
+      "exemple": {
+        "address": "atelier-exemple@subagentmail.fr",
+        "aliases": [],
+        "display_name": "Atelier Exemple",
+        "drafts": 0,
+        "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "next_send_at": null,
+        "queued": 1,
+        "quota": {
+          "daily_quota": 5,
+          "daily_max": 20,
+          "sent_today": 0,
+          "remaining_today": 5
+        },
+        "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+        "shared": false,
+        "status": "active",
+        "status_changed_at": null,
+        "status_reason": null,
+        "suspension": null,
+        "warmup": {}
+      }
+    },
+    "delete_inbox": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "confirm": {
+            "description": "Doit valoir true : la suppression est irréversible.",
+            "type": "boolean"
+          },
+          "inbox_id": {
+            "description": "La boîte à supprimer (inb_…).",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "inbox_id",
+          "confirm"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "confirm": true
+      },
+      "obligatoires": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "confirm": true
+      },
+      "exemple": {
+        "cancelled_messages": 0,
+        "deleted": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "remote_account_removed": true
+      }
+    },
+    "request_inbox_review": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "inbox_id": {
+            "description": "La boîte suspendue (inb_…, voir inbox_status).",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "note": {
+            "description": "Ce que votre humain veut dire à l’administrateur, facultatif : une ligne, 300 caractères au plus.",
+            "maxLength": 300,
+            "type": "string"
+          }
+        },
+        "required": [
+          "inbox_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "note": "A demandé à ne plus être contactée."
+      },
+      "obligatoires": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95"
+      },
+      "exemple": {
+        "already_requested": false,
+        "inbox": {
+          "address": "atelier-exemple@subagentmail.fr",
+          "aliases": [],
+          "display_name": "Atelier Exemple",
+          "drafts": 0,
+          "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "next_send_at": null,
+          "queued": 1,
+          "quota": {
+            "daily_quota": 5,
+            "daily_max": 20,
+            "sent_today": 0,
+            "remaining_today": 5
+          },
+          "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+          "shared": false,
+          "status": "active",
+          "status_changed_at": null,
+          "status_reason": null,
+          "suspension": null,
+          "warmup": {}
+        },
+        "requested": false,
+        "requested_at": "2026-10-13T09:00:00+02:00"
+      }
+    },
+    "add_domain": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "domain": {
+            "description": "Le nom de domaine, par exemple exemple.fr ou agents.exemple.fr.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "domain"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "domain": "agents.exemple.fr"
+      },
+      "obligatoires": {
+        "domain": "agents.exemple.fr"
+      },
+      "exemple": {
+        "domain": "agents.exemple.fr",
+        "id": "dom_9c4e7a1b3d5f4082b6a8c0e2f4d6b8a1",
+        "last_checked_at": null,
+        "records": [
+          {
+            "label": "Preuve de propriété",
+            "name": "_subagent.agents.exemple.fr",
+            "note": null,
+            "required": true,
+            "role": "ownership",
+            "seen": null,
+            "state": "found",
+            "type": "TXT",
+            "value": "subagent-verification=4f1c9a7e2b"
+          }
+        ],
+        "status": "pending",
+        "status_reason": null,
+        "verified_at": null
+      }
+    },
+    "verify_domain": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "domain": {
+            "description": "Le domaine à contrôler (voir list_domains).",
+            "type": "string"
+          }
+        },
+        "required": [
+          "domain"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "domain": "agents.exemple.fr"
+      },
+      "obligatoires": {
+        "domain": "agents.exemple.fr"
+      },
+      "exemple": {
+        "domain": "agents.exemple.fr",
+        "id": "dom_9c4e7a1b3d5f4082b6a8c0e2f4d6b8a1",
+        "last_checked_at": null,
+        "records": [
+          {
+            "label": "Preuve de propriété",
+            "name": "_subagent.agents.exemple.fr",
+            "note": null,
+            "required": true,
+            "role": "ownership",
+            "seen": null,
+            "state": "found",
+            "type": "TXT",
+            "value": "subagent-verification=4f1c9a7e2b"
+          }
+        ],
+        "status": "pending",
+        "status_reason": null,
+        "verified_at": null
+      }
+    },
+    "list_domains": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes",
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "items": [
+          {
+            "domain": "agents.exemple.fr",
+            "id": "dom_9c4e7a1b3d5f4082b6a8c0e2f4d6b8a1",
+            "last_checked_at": null,
+            "records": [
+              {
+                "label": "Preuve de propriété",
+                "name": "_subagent.agents.exemple.fr",
+                "note": null,
+                "required": true,
+                "role": "ownership",
+                "seen": null,
+                "state": "found",
+                "type": "TXT",
+                "value": "subagent-verification=4f1c9a7e2b"
+              }
+            ],
+            "status": "pending",
+            "status_reason": null,
+            "verified_at": null
+          }
+        ]
+      }
+    },
+    "domain_quality": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "days": {
+            "default": 7,
+            "description": "Période en jours civils de Paris, aujourd’hui inclus.",
+            "enum": [
+              7,
+              30
+            ],
+            "type": "integer"
+          },
+          "domain": {
+            "description": "Domaine enregistré dans cet espace (list_domains).",
+            "type": "string"
+          }
+        },
+        "required": [
+          "domain"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "domain": "agents.exemple.fr",
+        "days": 30
+      },
+      "obligatoires": {
+        "domain": "agents.exemple.fr"
+      },
+      "exemple": {
+        "collected_at": "2026-10-13T09:00:00+02:00",
+        "dns": {},
+        "domain": "agents.exemple.fr",
+        "history_excluded": false,
+        "inboxes": [],
+        "inboxes_truncated": false,
+        "notice": "Relisez l’audience et chaque variante avant de programmer.",
+        "period": {},
+        "protections": {},
+        "quality": false,
+        "rates": {},
+        "scope_limited": false,
+        "state": "blocked",
+        "tests_included": false,
+        "volume": {}
+      }
+    },
+    "remove_domain": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "confirm": {
+            "description": "Doit valoir true : le retrait est irréversible.",
+            "type": "boolean"
+          },
+          "domain": {
+            "description": "Le domaine à retirer (voir list_domains).",
+            "type": "string"
+          }
+        },
+        "required": [
+          "domain",
+          "confirm"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "domain": "agents.exemple.fr",
+        "confirm": true
+      },
+      "obligatoires": {
+        "domain": "agents.exemple.fr",
+        "confirm": true
+      },
+      "exemple": {
+        "remote_domain_removed": true,
+        "removed": "agents.exemple.fr"
+      }
+    },
+    "send_email": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "from_address": {
+            "description": "Adresse principale ou alias autorisé de la boîte (list_inboxes).",
+            "type": "string"
+          },
+          "html": {
+            "description": "Version HTML facultative, même contenu que text.",
+            "type": "string"
+          },
+          "idempotency_key": {
+            "description": "Clé unique de cet envoi (1 à 255 caractères). Rejouer la même clé avec le même contenu rend le message déjà créé ; avec un contenu différent, refus explicite. Recommandée pour tout réessai.",
+            "maxLength": 255,
+            "type": "string"
+          },
+          "inbox_id": {
+            "description": "Boîte d’envoi (inb_…, voir list_inboxes).",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "metadata": {
+            "description": "Données libres de l’agent (8 000 caractères au plus), rendues telles quelles dans les lectures et les webhooks.",
+            "type": "object"
+          },
+          "reply_to": {
+            "description": "Adresse de réponse, si elle diffère de la boîte.",
+            "type": "string"
+          },
+          "requires_approval": {
+            "description": "true : le message reste brouillon jusqu’à ce qu’un humain le valide (approve_message). Certains espaces l’imposent toujours.",
+            "type": "boolean"
+          },
+          "send_after": {
+            "description": "Pas avant cette date (ISO 8601, ou heure de Paris sans fuseau). Le créneau (sauf pour une réponse dans une conversation) et les quotas s’appliquent ensuite.",
+            "examples": [
+              "2026-10-13T09:00:00+02:00"
+            ],
+            "type": "string"
+          },
+          "subject": {
+            "description": "Sujet (une ligne).",
+            "maxLength": 300,
+            "type": "string"
+          },
+          "test": {
+            "description": "Envoi de test, à soi-même seulement (l’e-mail de l’humain de l’espace ou une autre boîte de l’espace) : pas de règle de doublon, et son lien de désinscription ne désinscrit personne.",
+            "type": "boolean"
+          },
+          "text": {
+            "description": "Texte brut du message (obligatoire). Écrivez {{unsubscribe_url}} pour placer vous-même le lien de désinscription ; sinon Subagent ajoute une mention en pied, tant que le correspondant n’a pas écrit dans le fil. Aucun autre {{champ}} n’est accepté : remplacez-les avant.",
+            "type": "string"
+          },
+          "to": {
+            "description": "Adresse du destinataire.",
+            "type": "string"
+          },
+          "to_name": {
+            "description": "Nom du destinataire, facultatif.",
+            "maxLength": 120,
+            "type": "string"
+          }
+        },
+        "required": [
+          "inbox_id",
+          "to",
+          "subject",
+          "text"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "to": "nadia.morel@exemple.com",
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+        "to_name": "Nadia Morel",
+        "test": false,
+        "from_address": "marie@exemple.fr",
+        "html": "<p>Bonjour Madame Morel,</p><p>Pouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?</p><p>Bien à vous,<br>Marie</p>",
+        "reply_to": "marie@exemple.fr",
+        "metadata": {
+          "dossier": "rdv-jeudi"
+        },
+        "requires_approval": true,
+        "send_after": "2026-10-13T09:00:00+02:00",
+        "idempotency_key": "rdv-jeudi-nadia-morel"
+      },
+      "obligatoires": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "to": "nadia.morel@exemple.com",
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie"
+      },
+      "exemple": {
+        "estimated_send_at": "2026-10-13T09:00:00+02:00",
+        "inbox": {
+          "address": "atelier-exemple@subagentmail.fr",
+          "aliases": [],
+          "display_name": "Atelier Exemple",
+          "drafts": 0,
+          "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "next_send_at": null,
+          "queued": 1,
+          "quota": {
+            "daily_quota": 5,
+            "daily_max": 20,
+            "sent_today": 0,
+            "remaining_today": 5
+          },
+          "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+          "shared": false,
+          "status": "active",
+          "status_changed_at": null,
+          "status_reason": null,
+          "suspension": null,
+          "warmup": {}
+        },
+        "message": {
+          "attachments": [],
+          "auto_reply": false,
+          "cc": [],
+          "created_at": "2026-10-13T09:00:00+02:00",
+          "direction": "outbound",
+          "from": "atelier-exemple@subagentmail.fr",
+          "has_html": false,
+          "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "received_at": null,
+          "reply_to": null,
+          "revision": "5d41402abc4b2a76",
+          "sent_at": null,
+          "status": "queued",
+          "status_code": null,
+          "subject": "Rendez-vous de jeudi",
+          "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+          "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "to": "nadia.morel@exemple.com"
+        },
+        "replayed": false,
+        "thread": {
+          "archived": false,
+          "counterpart": "nadia.morel@exemple.com",
+          "counterpart_name": "Nadia Morel",
+          "id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "labels": [],
+          "last_inbound_at": null,
+          "last_message_at": "2026-10-13T09:00:00+02:00",
+          "last_outbound_at": null,
+          "message_count": 1,
+          "origin": "outbound",
+          "status": "open",
+          "subject": "Rendez-vous de jeudi",
+          "unread": false
+        }
+      }
+    },
+    "list_threads": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "archived": {
+            "description": "true : archives ; false : conversations non archivées.",
+            "type": "boolean"
+          },
+          "cursor": {
+            "description": "Curseur de la page suivante : la valeur next_cursor de l’appel précédent.",
+            "type": "string"
+          },
+          "folder": {
+            "enum": [
+              "received",
+              "sent",
+              "drafts"
+            ],
+            "type": "string"
+          },
+          "inbox_id": {
+            "description": "Une seule boîte (inb_…).",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "label": {
+            "description": "Tag exact.",
+            "maxLength": 40,
+            "type": "string"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Nombre d’éléments rendus (20 par défaut).",
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "query": {
+            "description": "Recherche : une partie de l’adresse du correspondant, de son nom ou du sujet.",
+            "maxLength": 100,
+            "type": "string"
+          },
+          "since": {
+            "description": "Fils actifs depuis cette date.",
+            "examples": [
+              "2026-10-13T09:00:00+02:00"
+            ],
+            "type": "string"
+          },
+          "status": {
+            "description": "Un seul statut.",
+            "enum": [
+              "open",
+              "replied",
+              "bounced",
+              "unsubscribed",
+              "closed"
+            ],
+            "type": "string"
+          },
+          "unanswered": {
+            "description": "true : seulement les fils dont le dernier message est un e-mail reçu auquel rien n’est encore écrit en retour (une réponse, ou un premier e-mail).",
+            "type": "boolean"
+          },
+          "unread": {
+            "description": "true : messages reçus non lus ; false : lus.",
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "status": "replied",
+        "unanswered": true,
+        "archived": false,
+        "unread": true,
+        "label": "devis",
+        "folder": "received",
+        "since": "2026-10-12T00:00:00+02:00",
+        "query": "exemple.com",
+        "cursor": "eyJhIjoiMjAyNi0xMC0xMyJ9",
+        "limit": 20
+      },
+      "obligatoires": {},
+      "exemple": {
+        "inboxes": [],
+        "items": [
+          {
+            "archived": false,
+            "counterpart": "nadia.morel@exemple.com",
+            "counterpart_name": "Nadia Morel",
+            "id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+            "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+            "labels": [],
+            "last_inbound_at": null,
+            "last_message_at": "2026-10-13T09:00:00+02:00",
+            "last_outbound_at": null,
+            "message_count": 1,
+            "origin": "outbound",
+            "status": "replied",
+            "subject": "Rendez-vous de jeudi",
+            "unread": false
+          }
+        ],
+        "next_cursor": null
+      }
+    },
+    "classify_thread": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "archived": {
+            "description": "Archiver ou restaurer.",
+            "type": "boolean"
+          },
+          "labels": {
+            "items": {
+              "maxLength": 40,
+              "minLength": 1,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "type": "array"
+          },
+          "read": {
+            "description": "Marquer comme lu ou non lu.",
+            "type": "boolean"
+          },
+          "thread_id": {
+            "description": "Conversation à classer.",
+            "pattern": "^thr_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "thread_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "labels": [
+          "devis"
+        ],
+        "archived": false,
+        "read": true
+      },
+      "obligatoires": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814"
+      },
+      "exemple": {
+        "thread": {
+          "archived": false,
+          "counterpart": "nadia.morel@exemple.com",
+          "counterpart_name": "Nadia Morel",
+          "id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "labels": [],
+          "last_inbound_at": null,
+          "last_message_at": "2026-10-13T09:00:00+02:00",
+          "last_outbound_at": null,
+          "message_count": 1,
+          "origin": "outbound",
+          "status": "open",
+          "subject": "Rendez-vous de jeudi",
+          "unread": false
+        }
+      }
+    },
+    "inspect_domain": {
+      "sans_cle": false,
+      "permissions": [
+        "manage_inboxes"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "domain": {
+            "description": "Nom de domaine sans adresse mail ni URL.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "domain"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "domain": "agents.exemple.fr"
+      },
+      "obligatoires": {
+        "domain": "agents.exemple.fr"
+      },
+      "exemple": {
+        "current_mx": [],
+        "current_spf": [],
+        "domain": "agents.exemple.fr",
+        "receives_elsewhere": false,
+        "suggested_domain": "agents.exemple.fr"
+      }
+    },
+    "list_contacts": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_id": {
+            "description": "Limiter à une audience de l’espace.",
+            "pattern": "^aud_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "label": {
+            "description": "Tag exact.",
+            "maxLength": 80,
+            "type": "string"
+          },
+          "limit": {
+            "default": 100,
+            "maximum": 200,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "offset": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "query": {
+            "description": "Recherche dans l’adresse, le nom et les champs.",
+            "maxLength": 300,
+            "type": "string"
+          },
+          "subscription": {
+            "description": "subscribed : aucun blocage connu (pas une preuve de consentement). unsubscribed : désinscription. blocked : autre blocage effectif.",
+            "enum": [
+              "subscribed",
+              "unsubscribed",
+              "blocked"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "query": "exemple.com",
+        "label": "devis",
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "subscription": "subscribed",
+        "offset": 0,
+        "limit": 20
+      },
+      "obligatoires": {},
+      "exemple": {
+        "items": [
+          {
+            "audiences": [
+              {
+                "id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+                "name": "_subagent.agents.exemple.fr"
+              }
+            ],
+            "created_at": "2026-10-13T09:00:00+02:00",
+            "email": "nadia.morel@exemple.com",
+            "fields": {},
+            "labels": [],
+            "name": "_subagent.agents.exemple.fr",
+            "suppression": null,
+            "updated_at": "2026-10-13T09:00:00+02:00"
+          }
+        ],
+        "next_offset": 0,
+        "total": 0
+      }
+    },
+    "get_contact": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "description": "Adresse exacte du contact.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "email": "nadia.morel@exemple.com"
+      },
+      "obligatoires": {
+        "email": "nadia.morel@exemple.com"
+      },
+      "exemple": {
+        "contact": {
+          "audiences": [
+            {
+              "id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+              "name": "_subagent.agents.exemple.fr"
+            }
+          ],
+          "created_at": "2026-10-13T09:00:00+02:00",
+          "email": "nadia.morel@exemple.com",
+          "fields": {},
+          "labels": [],
+          "name": "_subagent.agents.exemple.fr",
+          "suppression": null,
+          "updated_at": "2026-10-13T09:00:00+02:00"
+        }
+      }
+    },
+    "save_contact": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "email": {
+            "description": "Adresse unique : crée la fiche si elle n’existe pas.",
+            "type": "string"
+          },
+          "fields": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Remplace les champs globaux si fourni ; les champs propres aux audiences restent inchangés.",
+            "type": "object"
+          },
+          "labels": {
+            "description": "Remplace les tags globaux si fourni.",
+            "items": {
+              "maxLength": 80,
+              "type": "string"
+            },
+            "maxItems": 20,
+            "type": "array"
+          },
+          "name": {
+            "description": "Nom. Absent : conservé ; vide : effacé.",
+            "maxLength": 160,
+            "type": "string"
+          }
+        },
+        "required": [
+          "email"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "email": "nadia.morel@exemple.com",
+        "name": "Atelier Exemple",
+        "fields": {
+          "prenom": "Nadia",
+          "societe": "Atelier Morel"
+        },
+        "labels": [
+          "devis"
+        ]
+      },
+      "obligatoires": {
+        "email": "nadia.morel@exemple.com"
+      },
+      "exemple": {
+        "contact": {
+          "audiences": [
+            {
+              "id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+              "name": "_subagent.agents.exemple.fr"
+            }
+          ],
+          "created_at": "2026-10-13T09:00:00+02:00",
+          "email": "nadia.morel@exemple.com",
+          "fields": {},
+          "labels": [],
+          "name": "_subagent.agents.exemple.fr",
+          "suppression": null,
+          "updated_at": "2026-10-13T09:00:00+02:00"
+        }
+      }
+    },
+    "set_contact_audiences": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_ids": {
+            "items": {
+              "description": "Audience de l’espace.",
+              "pattern": "^aud_[0-9a-f]{32}$",
+              "type": "string"
+            },
+            "maxItems": 200,
+            "type": "array"
+          },
+          "email": {
+            "description": "Adresse exacte de la fiche existante.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "email",
+          "audience_ids"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "email": "nadia.morel@exemple.com",
+        "audience_ids": [
+          "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26"
+        ]
+      },
+      "obligatoires": {
+        "email": "nadia.morel@exemple.com",
+        "audience_ids": [
+          "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26"
+        ]
+      },
+      "exemple": {
+        "contact": {
+          "audiences": [
+            {
+              "id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+              "name": "_subagent.agents.exemple.fr"
+            }
+          ],
+          "created_at": "2026-10-13T09:00:00+02:00",
+          "email": "nadia.morel@exemple.com",
+          "fields": {},
+          "labels": [],
+          "name": "_subagent.agents.exemple.fr",
+          "suppression": null,
+          "updated_at": "2026-10-13T09:00:00+02:00"
+        }
+      }
+    },
+    "list_audiences": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "items": []
+      }
+    },
+    "list_campaign_templates": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "templates": []
+      }
+    },
+    "save_campaign_template": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "html": {
+            "description": "HTML facultatif.",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nom.",
+            "type": "string"
+          },
+          "subject": {
+            "description": "Objet.",
+            "type": "string"
+          },
+          "template_id": {
+            "description": "Identifiant du modèle existant.",
+            "type": "string"
+          },
+          "text": {
+            "description": "Texte.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "subject",
+          "text"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "name": "Atelier Exemple",
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+        "template_id": "5d1c8e2a-7b3f-4e9a-b0c6-2f4d8a1e9c37",
+        "html": "<p>Bonjour Madame Morel,</p><p>Pouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?</p><p>Bien à vous,<br>Marie</p>"
+      },
+      "obligatoires": {
+        "name": "Atelier Exemple",
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie"
+      },
+      "exemple": {
+        "template": {}
+      }
+    },
+    "save_audience": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_id": {
+            "description": "Audience à renommer, facultative.",
+            "pattern": "^aud_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nom de l’audience.",
+            "maxLength": 160,
+            "type": "string"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "name": "Atelier Exemple",
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26"
+      },
+      "obligatoires": {
+        "name": "Atelier Exemple"
+      },
+      "exemple": {
+        "audience": {}
+      }
+    },
+    "get_audience": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_id": {
+            "description": "Audience.",
+            "pattern": "^aud_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "offset": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "audience_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "offset": 0
+      },
+      "obligatoires": {
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26"
+      },
+      "exemple": {
+        "audience": {},
+        "items": [],
+        "next_offset": 0
+      }
+    },
+    "import_contacts": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_id": {
+            "description": "Audience de destination.",
+            "pattern": "^aud_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "contacts": {
+            "items": {
+              "properties": {
+                "email": {
+                  "type": "string"
+                },
+                "fields": {
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "type": "object"
+                },
+                "labels": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "email"
+              ],
+              "type": "object"
+            },
+            "maxItems": 500,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "audience_id",
+          "contacts"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "contacts": [
+          {
+            "email": "marc.lefevre@exemple.com",
+            "name": "Marc Lefèvre",
+            "fields": {
+              "prenom": "Marc"
+            }
+          }
+        ]
+      },
+      "obligatoires": {
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "contacts": [
+          {
+            "email": "marc.lefevre@exemple.com",
+            "name": "Marc Lefèvre",
+            "fields": {
+              "prenom": "Marc"
+            }
+          }
+        ]
+      },
+      "exemple": {
+        "updated": 0
+      }
+    },
+    "remove_audience_contact": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_id": {
+            "description": "Audience.",
+            "pattern": "^aud_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "email": {
+            "description": "Adresse exacte.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "audience_id",
+          "email"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "email": "nadia.morel@exemple.com"
+      },
+      "obligatoires": {
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "email": "nadia.morel@exemple.com"
+      },
+      "exemple": {
+        "removed": "agents.exemple.fr"
+      }
+    },
+    "list_campaigns": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "archived": {
+            "description": "Afficher les archives.",
+            "type": "boolean"
+          },
+          "offset": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "offset": 0,
+        "archived": false
+      },
+      "obligatoires": {},
+      "exemple": {
+        "items": [],
+        "next_offset": 0
+      }
+    },
+    "save_campaign": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "audience_id": {
+            "description": "Audience.",
+            "pattern": "^aud_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "campaign_id": {
+            "description": "Brouillon à modifier, facultatif.",
+            "pattern": "^cmp_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "from_address": {
+            "description": "Adresse principale ou alias de cette boîte.",
+            "type": "string"
+          },
+          "inbox_id": {
+            "description": "Boîte expéditrice.",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "name": {
+            "description": "Nom.",
+            "maxLength": 160,
+            "type": "string"
+          },
+          "reply_to": {
+            "description": "Adresse de réponse facultative.",
+            "type": "string"
+          },
+          "steps": {
+            "items": {
+              "properties": {
+                "delay_days": {
+                  "maximum": 90,
+                  "minimum": 0,
+                  "type": "integer"
+                },
+                "variants": {
+                  "items": {
+                    "properties": {
+                      "html": {
+                        "maxLength": 100000,
+                        "type": "string"
+                      },
+                      "subject": {
+                        "maxLength": 500,
+                        "type": "string"
+                      },
+                      "text": {
+                        "maxLength": 16000,
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "subject",
+                      "text"
+                    ],
+                    "type": "object"
+                  },
+                  "maxItems": 3,
+                  "minItems": 1,
+                  "type": "array"
+                }
+              },
+              "required": [
+                "variants"
+              ],
+              "type": "object"
+            },
+            "maxItems": 4,
+            "minItems": 1,
+            "type": "array"
+          }
+        },
+        "required": [
+          "name",
+          "inbox_id",
+          "steps"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "name": "Atelier Exemple",
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "steps": [
+          {
+            "variants": [
+              {
+                "subject": "Vos chantiers de la rentrée",
+                "text": "Bonjour {{prenom}},\n\nUn mot sur vos chantiers.\n\n{{unsubscribe_url}}"
+              }
+            ]
+          }
+        ],
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "from_address": "marie@exemple.fr",
+        "audience_id": "aud_3c8f1a5e9d2b47c6a0e4f81b7d5c9e26",
+        "reply_to": "marie@exemple.fr"
+      },
+      "obligatoires": {
+        "name": "Atelier Exemple",
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "steps": [
+          {
+            "variants": [
+              {
+                "subject": "Vos chantiers de la rentrée",
+                "text": "Bonjour {{prenom}},\n\nUn mot sur vos chantiers.\n\n{{unsubscribe_url}}"
+              }
+            ]
+          }
+        ]
+      },
+      "exemple": {
+        "campaign": {}
+      }
+    },
+    "get_campaign": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "campaign_id": {
+            "description": "Campagne.",
+            "pattern": "^cmp_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "offset": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "campaign_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "offset": 0
+      },
+      "obligatoires": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3"
+      },
+      "exemple": {
+        "campaign": {},
+        "history": {},
+        "metrics": {}
+      }
+    },
+    "preview_campaign": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "campaign_id": {
+            "description": "Campagne.",
+            "pattern": "^cmp_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "offset": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "campaign_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "offset": 0
+      },
+      "obligatoires": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3"
+      },
+      "exemple": {
+        "blocked": [],
+        "blocked_count": 0,
+        "campaign": {},
+        "deferred": [],
+        "deferred_count": 0,
+        "notice": "Relisez l’audience et chaque variante avant de programmer.",
+        "previews": [],
+        "ready": false,
+        "recipients": 0,
+        "revision": "5d41402abc4b2a76"
+      }
+    },
+    "campaign_action": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "action": {
+            "enum": [
+              "start",
+              "pause",
+              "resume",
+              "stop",
+              "archive",
+              "restore",
+              "duplicate"
+            ],
+            "type": "string"
+          },
+          "campaign_id": {
+            "description": "Campagne.",
+            "pattern": "^cmp_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "confirm": {
+            "description": "Lancement relu et confirmé.",
+            "type": "boolean"
+          },
+          "revision": {
+            "description": "Empreinte rendue par preview_campaign, obligatoire pour start.",
+            "maxLength": 64,
+            "type": "string"
+          },
+          "starts_at": {
+            "description": "Premier départ au plus tôt, ensuite le créneau s’applique.",
+            "examples": [
+              "2026-10-13T09:00:00+02:00"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "campaign_id",
+          "action"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "action": "pause",
+        "starts_at": "2026-10-20T09:00:00+02:00",
+        "confirm": true,
+        "revision": "5d41402abc4b2a76"
+      },
+      "obligatoires": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "action": "pause"
+      },
+      "exemple": {
+        "campaign": {}
+      }
+    },
+    "campaign_metrics": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "campaign_id": {
+            "description": "Campagne.",
+            "pattern": "^cmp_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "offset": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "campaign_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "offset": 0
+      },
+      "obligatoires": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3"
+      },
+      "exemple": {
+        "campaign": {},
+        "metrics": {}
+      }
+    },
+    "campaign_history": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "campaign_id": {
+            "description": "Campagne.",
+            "pattern": "^cmp_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "offset": {
+            "maximum": 100000,
+            "minimum": 0,
+            "type": "integer"
+          }
+        },
+        "required": [
+          "campaign_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3",
+        "offset": 0
+      },
+      "obligatoires": {
+        "campaign_id": "cmp_6b2d9e41c7a84f03b5e1d28a90c4f7e3"
+      },
+      "exemple": {
+        "items": [],
+        "next_offset": 0
+      }
+    },
+    "get_thread": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "cursor": {
+            "description": "Curseur de la page suivante : la valeur next_cursor de l’appel précédent.",
+            "type": "string"
+          },
+          "thread_id": {
+            "description": "Le fil (thr_…).",
+            "pattern": "^thr_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "thread_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "cursor": "eyJhIjoiMjAyNi0xMC0xMyJ9"
+      },
+      "obligatoires": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814"
+      },
+      "exemple": {
+        "messages": [
+          {
+            "attachments": [],
+            "auto_reply": false,
+            "cc": [],
+            "created_at": "2026-10-13T09:00:00+02:00",
+            "direction": "inbound",
+            "from": "nadia.morel@exemple.com",
+            "has_html": false,
+            "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+            "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+            "received_at": "2026-10-13T09:00:00+02:00",
+            "reply_to": null,
+            "revision": "5d41402abc4b2a76",
+            "sent_at": null,
+            "status": "received",
+            "status_code": null,
+            "subject": "Re: Rendez-vous de jeudi",
+            "text": "Bonjour,\n\nVendredi 10 h me convient.\n\nNadia Morel",
+            "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+            "to": "atelier-exemple@subagentmail.fr"
+          }
+        ],
+        "next_cursor": null,
+        "thread": {
+          "archived": false,
+          "counterpart": "nadia.morel@exemple.com",
+          "counterpart_name": "Nadia Morel",
+          "id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "labels": [],
+          "last_inbound_at": null,
+          "last_message_at": "2026-10-13T09:00:00+02:00",
+          "last_outbound_at": null,
+          "message_count": 1,
+          "origin": "outbound",
+          "status": "replied",
+          "subject": "Rendez-vous de jeudi",
+          "unread": false
+        },
+        "truncated": false
+      }
+    },
+    "reply_to_thread": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "cc": {
+            "description": "Adresses en copie : seulement si le correspondant a déjà écrit dans le fil, vers quelqu’un qui y a lui aussi écrit ou une adresse de l’espace.",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 5,
+            "type": "array"
+          },
+          "from_address": {
+            "description": "Adresse principale ou alias autorisé de la boîte (list_inboxes).",
+            "type": "string"
+          },
+          "html": {
+            "description": "Version HTML facultative, même contenu que text.",
+            "type": "string"
+          },
+          "idempotency_key": {
+            "description": "Clé unique de cet envoi (1 à 255 caractères). Rejouer la même clé avec le même contenu rend le message déjà créé ; avec un contenu différent, refus explicite. Recommandée pour tout réessai.",
+            "maxLength": 255,
+            "type": "string"
+          },
+          "metadata": {
+            "description": "Données libres de l’agent (8 000 caractères au plus), rendues telles quelles dans les lectures et les webhooks.",
+            "type": "object"
+          },
+          "reply_to": {
+            "description": "Adresse de réponse, si elle diffère de la boîte.",
+            "type": "string"
+          },
+          "requires_approval": {
+            "description": "true : le message reste brouillon jusqu’à ce qu’un humain le valide (approve_message). Certains espaces l’imposent toujours.",
+            "type": "boolean"
+          },
+          "send_after": {
+            "description": "Pas avant cette date (ISO 8601, ou heure de Paris sans fuseau). Le créneau (sauf pour une réponse dans une conversation) et les quotas s’appliquent ensuite.",
+            "examples": [
+              "2026-10-13T09:00:00+02:00"
+            ],
+            "type": "string"
+          },
+          "subject": {
+            "description": "Sujet, facultatif : « Re: » + sujet du fil par défaut.",
+            "maxLength": 300,
+            "type": "string"
+          },
+          "text": {
+            "description": "Texte brut du message (obligatoire). Écrivez {{unsubscribe_url}} pour placer vous-même le lien de désinscription ; sinon Subagent ajoute une mention en pied, tant que le correspondant n’a pas écrit dans le fil. Aucun autre {{champ}} n’est accepté : remplacez-les avant.",
+            "type": "string"
+          },
+          "thread_id": {
+            "description": "Le fil (thr_…, voir list_threads).",
+            "pattern": "^thr_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "thread_id",
+          "text"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+        "subject": "Rendez-vous de jeudi",
+        "cc": [
+          "bureau.etudes@exemple.com"
+        ],
+        "from_address": "marie@exemple.fr",
+        "html": "<p>Bonjour Madame Morel,</p><p>Pouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?</p><p>Bien à vous,<br>Marie</p>",
+        "reply_to": "marie@exemple.fr",
+        "metadata": {
+          "dossier": "rdv-jeudi"
+        },
+        "requires_approval": true,
+        "send_after": "2026-10-13T09:00:00+02:00",
+        "idempotency_key": "rdv-jeudi-nadia-morel"
+      },
+      "obligatoires": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie"
+      },
+      "exemple": {
+        "estimated_send_at": "2026-10-13T09:00:00+02:00",
+        "inbox": {
+          "address": "atelier-exemple@subagentmail.fr",
+          "aliases": [],
+          "display_name": "Atelier Exemple",
+          "drafts": 0,
+          "id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "next_send_at": null,
+          "queued": 1,
+          "quota": {
+            "daily_quota": 5,
+            "daily_max": 20,
+            "sent_today": 0,
+            "remaining_today": 5
+          },
+          "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+          "shared": false,
+          "status": "active",
+          "status_changed_at": null,
+          "status_reason": null,
+          "suspension": null,
+          "warmup": {}
+        },
+        "message": {
+          "attachments": [],
+          "auto_reply": false,
+          "cc": [],
+          "created_at": "2026-10-13T09:00:00+02:00",
+          "direction": "outbound",
+          "from": "atelier-exemple@subagentmail.fr",
+          "has_html": false,
+          "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "received_at": null,
+          "reply_to": null,
+          "revision": "5d41402abc4b2a76",
+          "sent_at": null,
+          "status": "queued",
+          "status_code": null,
+          "subject": "Rendez-vous de jeudi",
+          "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+          "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "to": "nadia.morel@exemple.com"
+        },
+        "replayed": false,
+        "thread": {
+          "archived": false,
+          "counterpart": "nadia.morel@exemple.com",
+          "counterpart_name": "Nadia Morel",
+          "id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "labels": [],
+          "last_inbound_at": null,
+          "last_message_at": "2026-10-13T09:00:00+02:00",
+          "last_outbound_at": null,
+          "message_count": 1,
+          "origin": "outbound",
+          "status": "open",
+          "subject": "Rendez-vous de jeudi",
+          "unread": false
+        }
+      }
+    },
+    "close_thread": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "thread_id": {
+            "description": "Le fil à clore (thr_…).",
+            "pattern": "^thr_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "thread_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814"
+      },
+      "obligatoires": {
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814"
+      },
+      "exemple": {
+        "closed": true,
+        "thread": {
+          "archived": false,
+          "counterpart": "nadia.morel@exemple.com",
+          "counterpart_name": "Nadia Morel",
+          "id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "labels": [],
+          "last_inbound_at": null,
+          "last_message_at": "2026-10-13T09:00:00+02:00",
+          "last_outbound_at": null,
+          "message_count": 1,
+          "origin": "outbound",
+          "status": "closed",
+          "subject": "Rendez-vous de jeudi",
+          "unread": false
+        }
+      }
+    },
+    "get_message": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "message_id": {
+            "description": "Le message (msg_…).",
+            "pattern": "^msg_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48"
+      },
+      "obligatoires": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48"
+      },
+      "exemple": {
+        "events": [],
+        "message": {
+          "attachments": [],
+          "auto_reply": false,
+          "cc": [],
+          "created_at": "2026-10-13T09:00:00+02:00",
+          "direction": "outbound",
+          "from": "atelier-exemple@subagentmail.fr",
+          "has_html": false,
+          "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+          "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+          "received_at": null,
+          "reply_to": null,
+          "revision": "5d41402abc4b2a76",
+          "sent_at": null,
+          "status": "sent",
+          "status_code": null,
+          "subject": "Rendez-vous de jeudi",
+          "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+          "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+          "to": "nadia.morel@exemple.com"
+        },
+        "waiting": null
+      }
+    },
+    "list_drafts": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "cursor": {
+            "description": "Curseur de la page suivante : la valeur next_cursor de l’appel précédent.",
+            "type": "string"
+          },
+          "inbox_id": {
+            "description": "Une seule boîte (inb_…).",
+            "pattern": "^inb_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Nombre d’éléments rendus (20 par défaut).",
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "cursor": "eyJhIjoiMjAyNi0xMC0xMyJ9",
+        "limit": 20
+      },
+      "obligatoires": {},
+      "exemple": {
+        "items": [
+          {
+            "attachments": [],
+            "auto_reply": false,
+            "cc": [],
+            "created_at": "2026-10-13T09:00:00+02:00",
+            "direction": "outbound",
+            "from": "atelier-exemple@subagentmail.fr",
+            "has_html": false,
+            "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+            "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+            "received_at": null,
+            "reply_to": null,
+            "revision": "5d41402abc4b2a76",
+            "sent_at": null,
+            "status": "draft",
+            "status_code": null,
+            "subject": "Rendez-vous de jeudi",
+            "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+            "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+            "to": "nadia.morel@exemple.com"
+          }
+        ],
+        "key": {},
+        "next_cursor": null
+      }
+    },
+    "update_draft": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "html": {
+            "description": "Nouveau HTML (texte vide : retire la version HTML).",
+            "type": "string"
+          },
+          "message_id": {
+            "description": "Le brouillon (msg_…, voir list_drafts).",
+            "pattern": "^msg_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "subject": {
+            "description": "Nouveau sujet.",
+            "maxLength": 300,
+            "type": "string"
+          },
+          "text": {
+            "description": "Nouveau texte.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+        "html": "<p>Bonjour Madame Morel,</p><p>Pouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?</p><p>Bien à vous,<br>Marie</p>"
+      },
+      "obligatoires": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48"
+      },
+      "exemple": {
+        "attachments": [],
+        "auto_reply": false,
+        "cc": [],
+        "created_at": "2026-10-13T09:00:00+02:00",
+        "direction": "outbound",
+        "from": "atelier-exemple@subagentmail.fr",
+        "has_html": false,
+        "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "received_at": null,
+        "reply_to": null,
+        "revision": "5d41402abc4b2a76",
+        "sent_at": null,
+        "status": "draft",
+        "status_code": null,
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "to": "nadia.morel@exemple.com"
+      }
+    },
+    "approve_message": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "message_id": {
+            "description": "Le brouillon (msg_…, voir list_drafts).",
+            "pattern": "^msg_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "revision": {
+            "description": "La version du brouillon tel qu’il a été lu (champ revision de list_drafts). S’il a changé depuis, la validation est refusée (draft_changed).",
+            "maxLength": 32,
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "revision": "5d41402abc4b2a76"
+      },
+      "obligatoires": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48"
+      },
+      "exemple": {
+        "attachments": [],
+        "auto_reply": false,
+        "cc": [],
+        "created_at": "2026-10-13T09:00:00+02:00",
+        "direction": "outbound",
+        "estimated_send_at": "2026-10-13T09:00:00+02:00",
+        "from": "atelier-exemple@subagentmail.fr",
+        "has_html": false,
+        "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "received_at": null,
+        "reply_to": null,
+        "revision": "5d41402abc4b2a76",
+        "sent_at": null,
+        "status": "queued",
+        "status_code": null,
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "to": "nadia.morel@exemple.com"
+      }
+    },
+    "cancel_message": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "message_id": {
+            "description": "Le message (msg_…).",
+            "pattern": "^msg_[0-9a-f]{32}$",
+            "type": "string"
+          },
+          "reason": {
+            "description": "Pourquoi, pour le journal.",
+            "maxLength": 300,
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "reason": "Rendez-vous annulé."
+      },
+      "obligatoires": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48"
+      },
+      "exemple": {
+        "attachments": [],
+        "auto_reply": false,
+        "cc": [],
+        "created_at": "2026-10-13T09:00:00+02:00",
+        "direction": "outbound",
+        "from": "atelier-exemple@subagentmail.fr",
+        "has_html": false,
+        "id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "inbox_id": "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95",
+        "received_at": null,
+        "reply_to": null,
+        "revision": "5d41402abc4b2a76",
+        "sent_at": null,
+        "status": "cancelled",
+        "status_code": null,
+        "subject": "Rendez-vous de jeudi",
+        "text": "Bonjour Madame Morel,\n\nPouvons-nous déplacer notre rendez-vous de jeudi à vendredi, 10 h ?\n\nBien à vous,\nMarie",
+        "thread_id": "thr_0e5a7c2b9f1d48e6a3c7b5d0e2f9a814",
+        "to": "nadia.morel@exemple.com"
+      }
+    },
+    "attach_files": {
+      "sans_cle": false,
+      "permissions": [
+        "send"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "message_id": {
+            "description": "Le brouillon (msg_…).",
+            "pattern": "^msg_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "message_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48"
+      },
+      "obligatoires": {
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48"
+      },
+      "exemple": {
+        "attachments": [],
+        "expires_at": "2026-10-13T10:00:00+02:00",
+        "max_bytes": 10485760,
+        "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+        "upload_url": "https://api.subagent.fr/f/sfl_exemple"
+      }
+    },
+    "remove_attachment": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "approve"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "attachment_id": {
+            "description": "La pièce (att_…).",
+            "pattern": "^att_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attachment_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "attachment_id": "att_5e1c9a7b3d2f40618c4e6a0b9d7f2c35"
+      },
+      "obligatoires": {
+        "attachment_id": "att_5e1c9a7b3d2f40618c4e6a0b9d7f2c35"
+      },
+      "exemple": {
+        "attachments": [],
+        "removed": {
+          "id": "att_5e1c9a7b3d2f40618c4e6a0b9d7f2c35",
+          "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+          "filename": "plan-rdc.pdf",
+          "content_type": "application/pdf",
+          "size": 482133,
+          "stored": true
+        }
+      }
+    },
+    "get_attachment": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "attachment_id": {
+            "description": "La pièce (att_…).",
+            "pattern": "^att_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "attachment_id"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "attachment_id": "att_5e1c9a7b3d2f40618c4e6a0b9d7f2c35"
+      },
+      "obligatoires": {
+        "attachment_id": "att_5e1c9a7b3d2f40618c4e6a0b9d7f2c35"
+      },
+      "exemple": {
+        "attachment": {
+          "id": "att_5e1c9a7b3d2f40618c4e6a0b9d7f2c35",
+          "message_id": "msg_7f2a91c4e8b34d0fa6c25e1b9d3f7a48",
+          "filename": "plan-rdc.pdf",
+          "content_type": "application/pdf",
+          "size": 482133,
+          "stored": true
+        },
+        "download_url": "https://api.subagent.fr/f/sfl_exemple",
+        "expires_at": "2026-10-13T09:15:00+02:00",
+        "text": null,
+        "untrusted": true
+      }
+    },
+    "add_suppression": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "description": "Une adresse (marie@example.com) ou un domaine entier (@example.com).",
+            "type": "string"
+          },
+          "note": {
+            "description": "Pourquoi, pour le journal.",
+            "maxLength": 300,
+            "type": "string"
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "address": "nadia.morel@exemple.com",
+        "note": "A demandé à ne plus être contactée."
+      },
+      "obligatoires": {
+        "address": "nadia.morel@exemple.com"
+      },
+      "exemple": {
+        "cancelled_messages": 0,
+        "kind": "address",
+        "new": true,
+        "value": "nadia.morel@exemple.com"
+      }
+    },
+    "remove_suppression": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "address": {
+            "description": "Une adresse (marie@example.com) ou un domaine entier (@example.com).",
+            "type": "string"
+          }
+        },
+        "required": [
+          "address"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "address": "nadia.morel@exemple.com"
+      },
+      "obligatoires": {
+        "address": "nadia.morel@exemple.com"
+      },
+      "exemple": {
+        "removed": "nadia.morel@exemple.com"
+      }
+    },
+    "list_suppressions": {
+      "sans_cle": false,
+      "permissions": [
+        "read"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "cursor": {
+            "description": "Curseur de la page suivante : la valeur next_cursor de l’appel précédent.",
+            "type": "string"
+          },
+          "limit": {
+            "default": 20,
+            "description": "Nombre d’éléments rendus (20 par défaut).",
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "query": {
+            "description": "Une partie d’adresse ou de domaine ; une adresse complète pour savoir si elle est morte.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "query": "exemple.com",
+        "cursor": "eyJhIjoiMjAyNi0xMC0xMyJ9",
+        "limit": 20
+      },
+      "obligatoires": {},
+      "exemple": {
+        "items": [
+          {
+            "created_at": "2026-10-13T09:00:00+02:00",
+            "kind": "address",
+            "reason": "unsubscribe",
+            "scope": "tenant",
+            "source": null,
+            "value": "nadia.morel@exemple.com"
+          }
+        ],
+        "next_cursor": null
+      }
+    },
+    "get_settings": {
+      "sans_cle": false,
+      "permissions": [
+        "read",
+        "send",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "changed": [],
+        "dedup_days": 30,
+        "limits": {},
+        "postal_address": "12 rue des Lilas, 69007 Lyon",
+        "require_approval": false,
+        "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+        "space": {
+          "id": "ten_5b8e1f3a7c2d4e9f8a6b0c1d2e3f4a5b",
+          "name": "Atelier Exemple",
+          "verified": true
+        },
+        "spacing_minutes": 10,
+        "webhook": null
+      }
+    },
+    "update_settings": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "dedup_days": {
+            "description": "Jours sans second premier message au même destinataire.",
+            "maximum": 365,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "name": {
+            "description": "Nom de l’espace.",
+            "maxLength": 80,
+            "type": "string"
+          },
+          "no_send_days": {
+            "description": "Jours sans envoi (AAAA-MM-JJ) ; la liste remplace la précédente.",
+            "items": {
+              "type": "string"
+            },
+            "maxItems": 60,
+            "type": "array"
+          },
+          "postal_address": {
+            "description": "Adresse postale de l’expéditeur, sur une ligne, écrite en pied des premiers messages.",
+            "maxLength": 200,
+            "type": "string"
+          },
+          "require_approval": {
+            "description": "true : tout envoi reste brouillon jusqu’à sa validation.",
+            "type": "boolean"
+          },
+          "saturday": {
+            "description": "Plages du samedi, ou closed.",
+            "type": "string"
+          },
+          "skip_holidays": {
+            "description": "true : rien ne part les jours fériés français.",
+            "type": "boolean"
+          },
+          "spacing_minutes": {
+            "description": "Minutes au moins entre deux envois d’une boîte.",
+            "maximum": 240,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "sunday": {
+            "description": "Plages du dimanche, ou closed.",
+            "type": "string"
+          },
+          "weekdays": {
+            "description": "Plages du lundi au vendredi.",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "name": "Atelier Exemple",
+        "postal_address": "12 rue des Lilas, 69007 Lyon",
+        "weekdays": "8-12,14-18",
+        "saturday": "9-12",
+        "sunday": "closed",
+        "skip_holidays": true,
+        "no_send_days": [
+          "2026-12-24"
+        ],
+        "require_approval": true,
+        "spacing_minutes": 20,
+        "dedup_days": 60
+      },
+      "obligatoires": {},
+      "exemple": {
+        "changed": [
+          "dedup_days",
+          "spacing_minutes"
+        ],
+        "dedup_days": 60,
+        "limits": {},
+        "postal_address": "12 rue des Lilas, 69007 Lyon",
+        "require_approval": false,
+        "send_window": "du lundi au vendredi, de 9 h à 18 h, heure de Paris, jours fériés exclus",
+        "space": {
+          "id": "ten_5b8e1f3a7c2d4e9f8a6b0c1d2e3f4a5b",
+          "name": "Atelier Exemple",
+          "verified": true
+        },
+        "spacing_minutes": 20,
+        "webhook": null
+      }
+    },
+    "list_keys": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "items": [
+          {
+            "created_at": "2026-10-13T09:00:00+02:00",
+            "current": false,
+            "daily_cap": 0,
+            "human_email": null,
+            "id": "key_5a0d8e3c9b714f26a1e47c08b3d95f62",
+            "inboxes": "all",
+            "kind": "key",
+            "last_used_at": null,
+            "name": "agent-devis",
+            "permissions": [
+              "send",
+              "read"
+            ],
+            "prefix": "sak_exemple_"
+          }
+        ]
+      }
+    },
+    "create_key": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "daily_cap": {
+            "description": "Plafond de messages créés par jour. Absent : aucun.",
+            "maximum": 10000,
+            "minimum": 1,
+            "type": "integer"
+          },
+          "inbox_ids": {
+            "description": "Les seules boîtes ouvertes à la clé. Absent : toutes, présentes et à venir.",
+            "items": {
+              "pattern": "^inb_[0-9a-f]{32}$",
+              "type": "string"
+            },
+            "type": "array"
+          },
+          "name": {
+            "description": "Nom de l’agent, par exemple « agent-devis ».",
+            "maxLength": 60,
+            "type": "string"
+          },
+          "permissions": {
+            "description": "Absent : send et read.",
+            "items": {
+              "enum": [
+                "send",
+                "read",
+                "manage_inboxes"
+              ],
+              "type": "string"
+            },
+            "type": "array"
+          }
+        },
+        "required": [
+          "name"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "name": "Atelier Exemple",
+        "permissions": [
+          "send",
+          "read"
+        ],
+        "inbox_ids": [
+          "inb_3f9c2a7e5b1d4c8e9a0f6b2d7c4e1a95"
+        ],
+        "daily_cap": 50
+      },
+      "obligatoires": {
+        "name": "Atelier Exemple"
+      },
+      "exemple": {
+        "api_key": "sak_exemple_agent",
+        "key": {
+          "created_at": "2026-10-13T09:00:00+02:00",
+          "current": false,
+          "daily_cap": 0,
+          "human_email": null,
+          "id": "key_5a0d8e3c9b714f26a1e47c08b3d95f62",
+          "inboxes": "all",
+          "kind": "key",
+          "last_used_at": null,
+          "name": "agent-devis",
+          "permissions": [
+            "send",
+            "read"
+          ],
+          "prefix": "sak_exemple_"
+        },
+        "mcp_url": "https://api.subagent.fr/mcp"
+      }
+    },
+    "revoke_key": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "confirm": {
+            "description": "Doit valoir true : la révocation est sans retour.",
+            "type": "boolean"
+          },
+          "key_id": {
+            "description": "L’accès à retirer (key_…, voir list_keys).",
+            "pattern": "^key_[0-9a-f]{32}$",
+            "type": "string"
+          }
+        },
+        "required": [
+          "key_id",
+          "confirm"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "key_id": "key_5a0d8e3c9b714f26a1e47c08b3d95f62",
+        "confirm": true
+      },
+      "obligatoires": {
+        "key_id": "key_5a0d8e3c9b714f26a1e47c08b3d95f62",
+        "confirm": true
+      },
+      "exemple": {
+        "kind": "key",
+        "name": "agent-devis",
+        "revoked": "key_5a0d8e3c9b714f26a1e47c08b3d95f62"
+      }
+    },
+    "set_webhook": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "vérifié",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "url": {
+            "description": "L’adresse https qui recevra les événements.",
+            "maxLength": 500,
+            "type": "string"
+          }
+        },
+        "required": [
+          "url"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "url": "https://exemple.fr/hooks/subagent"
+      },
+      "obligatoires": {
+        "url": "https://exemple.fr/hooks/subagent"
+      },
+      "exemple": {
+        "events": [
+          "message.sent",
+          "message.delivered",
+          "message.bounced",
+          "message.rejected",
+          "message.unsubscribed",
+          "thread.replied",
+          "thread.received",
+          "inbox.suspended"
+        ],
+        "replaced": false,
+        "secret": "whsec_exemple",
+        "url": "https://exemple.fr/hooks/subagent"
+      }
+    },
+    "remove_webhook": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {},
+        "type": "object"
+      },
+      "arguments": {},
+      "obligatoires": {},
+      "exemple": {
+        "removed": "https://exemple.fr/hooks/subagent"
+      }
+    },
+    "close_space": {
+      "sans_cle": false,
+      "permissions": [
+        "approve"
+      ],
+      "espace": "tout",
+      "lecture_seule": false,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "cancel": {
+            "description": "true : annule la clôture confirmée, et tout code en attente.",
+            "type": "boolean"
+          },
+          "confirmation_code": {
+            "description": "Le code à 6 chiffres que l’humain de l’espace a reçu par e-mail et vous donne. Absent : le code est envoyé, rien n’est confirmé.",
+            "pattern": "^[0-9 -]{6,9}$",
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "confirmation_code": "482913",
+        "cancel": false
+      },
+      "obligatoires": {},
+      "exemple": {
+        "cancelled": false,
+        "closes_at": "2026-10-15T09:00:00+02:00",
+        "code_sent": false,
+        "expires_at": null,
+        "human_email": null,
+        "removes": {
+          "inboxes": 1,
+          "domains": 0,
+          "subscription": false,
+          "invoices_kept": 0
+        },
+        "scheduled": true
+      }
+    }
+  }
+}
