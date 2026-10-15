@@ -9,6 +9,6 @@
     "node": ">=20"
   },
   "dependencies": {
-    "subagent-mail": "github:subagent-fr/subagent-node"
+    "subagent-mail": "^0.1.0"
   }
 }

@@ -1,5 +1,5 @@
 {
-  "source": "registre d'opérations du serveur Subagent (API 0.10.6)",
+  "source": "registre d'opérations du serveur Subagent (API 0.12.0)",
   "operations": {
     "sign_up": {
       "sans_cle": true,
@@ -141,6 +141,180 @@
         "code_sent": true,
         "human_email": "m•••@exemple.fr",
         "replaced": false
+      }
+    },
+    "open_workspace": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "read",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "arguments": {
+            "description": "Arguments de lecture de la page : query pour chercher un contact, email pour sa fiche, campaign_id, audience_id, thread_id ou message_id pour ouvrir un détail. Aucun envoi.",
+            "type": "object"
+          },
+          "page": {
+            "description": "Rubrique à afficher. jour par défaut. performances avec campaign_id montre les résultats de cette campagne.",
+            "enum": [
+              "jour",
+              "valider",
+              "fils",
+              "campagnes",
+              "audiences",
+              "contacts",
+              "boites",
+              "domaines",
+              "blocages",
+              "espace",
+              "performances"
+            ],
+            "type": "string"
+          }
+        },
+        "type": "object"
+      },
+      "arguments": {
+        "page": "audiences",
+        "arguments": {}
+      },
+      "obligatoires": {},
+      "exemple": {
+        "_navigation": {},
+        "closed": false,
+        "instance_id": "8abf26e0-f58a-4a49-8cb2-90858b2df812",
+        "sequence": 0,
+        "status": "pending",
+        "unchanged": false
+      }
+    },
+    "navigate_workspace": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "read",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "arguments": {
+            "description": "Arguments de lecture de la page : query pour chercher un contact, email pour sa fiche, campaign_id, audience_id, thread_id ou message_id pour ouvrir un détail. Aucun envoi.",
+            "type": "object"
+          },
+          "instance_id": {
+            "description": "Identifiant de l’établi actif, fourni par son contexte. Ne jamais en inventer ni reprendre celui d’une autre conversation.",
+            "type": "string"
+          },
+          "page": {
+            "description": "Rubrique à afficher. jour par défaut. performances avec campaign_id montre les résultats de cette campagne.",
+            "enum": [
+              "jour",
+              "valider",
+              "fils",
+              "campagnes",
+              "audiences",
+              "contacts",
+              "boites",
+              "domaines",
+              "blocages",
+              "espace",
+              "performances"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "instance_id",
+          "page"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "instance_id": "8abf26e0-f58a-4a49-8cb2-90858b2df812",
+        "page": "audiences",
+        "arguments": {}
+      },
+      "obligatoires": {
+        "instance_id": "8abf26e0-f58a-4a49-8cb2-90858b2df812",
+        "page": "audiences"
+      },
+      "exemple": {
+        "_navigation": {},
+        "closed": false,
+        "instance_id": "8abf26e0-f58a-4a49-8cb2-90858b2df812",
+        "sequence": 0,
+        "status": "pending",
+        "unchanged": false
+      }
+    },
+    "workspace_events": {
+      "sans_cle": false,
+      "permissions": [
+        "send",
+        "read",
+        "approve",
+        "manage_inboxes"
+      ],
+      "espace": "tout",
+      "lecture_seule": true,
+      "entree": {
+        "additionalProperties": false,
+        "properties": {
+          "ack_sequence": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "after_sequence": {
+            "minimum": 0,
+            "type": "integer"
+          },
+          "close": {
+            "description": "Libère cette instance à la fermeture de la vue, sans attendre.",
+            "type": "boolean"
+          },
+          "instance_id": {
+            "description": "Instance de cet établi.",
+            "type": "string"
+          },
+          "local_navigation": {
+            "description": "Barrière de séquence après un geste de navigation local. Invalide les commandes précédentes sans relire la page.",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "instance_id",
+          "after_sequence"
+        ],
+        "type": "object"
+      },
+      "arguments": {
+        "instance_id": "8abf26e0-f58a-4a49-8cb2-90858b2df812",
+        "after_sequence": 0,
+        "ack_sequence": 0,
+        "close": false,
+        "local_navigation": false
+      },
+      "obligatoires": {
+        "instance_id": "8abf26e0-f58a-4a49-8cb2-90858b2df812",
+        "after_sequence": 0
+      },
+      "exemple": {
+        "_navigation": {},
+        "closed": false,
+        "instance_id": "8abf26e0-f58a-4a49-8cb2-90858b2df812",
+        "sequence": 0,
+        "status": "pending",
+        "unchanged": false
       }
     },
     "inbox_status": {
