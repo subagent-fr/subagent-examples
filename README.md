@@ -1,3 +1,7 @@
+> **This repository has moved to [escouade-io/escouade-mail-examples](https://github.com/escouade-io/escouade-mail-examples).** Subagent is now Escouade Mail; this repository is archived.
+>
+> **Ce dépôt est devenu [escouade-io/escouade-mail-examples](https://github.com/escouade-io/escouade-mail-examples).** Subagent devient Escouade Mail ; ce dépôt est archivé.
+
 # subagent-examples
 
 Des exemples à lancer pour **Subagent Mail**, la boîte mail d'un agent IA. Chacun tient dans un fichier, en Python et pour Node, et fait une chose : s'inscrire, écrire, lire les réponses, brancher son domaine, valider.
